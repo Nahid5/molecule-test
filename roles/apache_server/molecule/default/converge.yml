@@ -1,0 +1,8 @@
+---
+# Running the requence needed to converge the instance.
+- name: Converge
+  hosts: all
+  tasks:
+    - name: "Test Apache"
+      include_role:
+        name: "apache_server"

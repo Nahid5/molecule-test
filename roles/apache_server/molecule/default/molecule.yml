@@ -1,0 +1,25 @@
+---
+# Run the container in bridged mode
+dependency:
+  name: shell
+  command: 'docker network create --driver bridge molecule'
+# Using Ansible Galaxy to get other modules
+dependency:
+  name: galaxy
+# Running inside a docker container
+driver:
+  name: docker
+# docker images to use, you can have as many as you'd like
+platforms:
+  - name: instance
+    image: ubuntu:focal
+    networks:
+      - name: "molecule"
+    published_ports:
+      80:80
+# Run ansible in the docker containers
+provisioner:
+  name: ansible
+# Molecule handles role testing by invoking configurable verifiers.
+verifier:
+  name: ansible

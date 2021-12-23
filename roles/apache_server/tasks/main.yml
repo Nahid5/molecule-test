@@ -1,0 +1,20 @@
+---
+- name: Install ubuntu
+  apt:
+    pkg:
+      - apache2
+    state: present
+    update_cache: yes
+  become: true
+  retries: 10
+
+- name: Move test txt file to server
+  template:
+    src: "test.txt"
+    dest: "/var/www/html"
+    force: yes
+  become: true
+
+- name: Service start
+  shell: service apache2 restart
+  become: true
